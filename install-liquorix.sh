@@ -1,8 +1,16 @@
 #!/bin/bash
 
+# NOTE:- 
+# The script is intended to be used with ubuntu studio.
 
 GRUB_SCRIPT_DIRECTORY="/etc/grub.d"
 GRUB_FILE="/etc/default/grub"
+
+# Update the package cache and the system for hygiene
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get dist-upgrade -y
+
 
 # Remove ubuntu studio restrictions from displaying of unofficial linux kernels
 sudo sed -i "s/^/#/g" $GRUB_SCRIPT_DIRECTORY/9_lowlatency 
@@ -24,6 +32,11 @@ sudo update-grub
 # Install liquorix kernel
 sudo apt install curl -y 
 curl -s 'https://liquorix.net/install-liquorix.sh' | sudo bash
+
+echo "
+
+[*] Please reboot the system for the changes to take effect !!
+" 
 
 # The above liquorix script will update the grub and set the default option in grub for liquorix kernel. 
 
